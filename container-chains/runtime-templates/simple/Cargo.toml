@@ -85,6 +85,7 @@ staging-xcm = { workspace = true }
 staging-xcm-builder = { workspace = true }
 staging-xcm-executor = { workspace = true }
 xcm-runtime-apis = { workspace = true }
+pallet_ip_pallet  = { workspace = true }
 
 # Cumulus
 cumulus-pallet-parachain-system = { workspace = true }
@@ -180,6 +181,7 @@ std = [
 	"tanssi-runtime-common/std",
 	"xcm-primitives/std",
 	"xcm-runtime-apis/std",
+	"pallet_ip_pallet/std",
 ]
 
 # Allow to print logs details (no wasm:stripped)

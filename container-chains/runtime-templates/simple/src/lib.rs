@@ -31,6 +31,9 @@ pub use sp_runtime::BuildStorage;
 
 pub mod migrations;
 pub mod weights;
+pub mod configs;
+
+use pallet_ip_pallet;
 
 pub use sp_runtime::{MultiAddress, Perbill, Permill};
 use {
@@ -224,7 +227,7 @@ pub const VERSION: RuntimeVersion = RuntimeVersion {
     spec_name: create_runtime_str!("container-chain-template"),
     impl_name: create_runtime_str!("container-chain-template"),
     authoring_version: 1,
-    spec_version: 1000,
+    spec_version: 1002,
     impl_version: 0,
     apis: RUNTIME_API_VERSIONS,
     transaction_version: 1,
@@ -634,6 +637,17 @@ impl pallet_tx_pause::Config for Runtime {
     type WeightInfo = weights::pallet_tx_pause::SubstrateWeight<Runtime>;
 }
 
+// pub type IPPallet = pallet_ip_pallet::Pallet<Runtime>;
+
+    impl pallet_ip_pallet::Config for Runtime {
+        type RuntimeEvent = RuntimeEvent;
+        type Currency = Balances;
+        type LicenseId = u32;
+        type MaxNameLength = ConstU32<50>;
+        type MaxDescriptionLength = ConstU32<200>;
+    }
+
+
 impl dp_impl_tanssi_pallets_config::Config for Runtime {
     const SLOT_DURATION: u64 = SLOT_DURATION;
     type TimestampWeights = weights::pallet_timestamp::SubstrateWeight<Runtime>;
@@ -701,6 +715,9 @@ construct_runtime!(
         RootTesting: pallet_root_testing = 100,
         AsyncBacking: pallet_async_backing::{Pallet, Storage} = 110,
 
+        // IP_PALLET
+        IPPallet: pallet_ip_pallet = 111,
+
     }
 );
 
@@ -726,6 +743,7 @@ mod benches {
         [pallet_foreign_asset_creator, ForeignAssetsCreator]
         [pallet_asset_rate, AssetRate]
         [pallet_xcm_executor_utils, XcmExecutorUtils]
+        [pallet_ip_pallet, IPs]
     );
 }
 

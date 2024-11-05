@@ -499,6 +499,10 @@ polkadot-node-core-pvf-prepare-worker  = { git = "https://github.com/moondance-l
 
 substrate-rpc-client = { git = "https://github.com/moondance-labs/polkadot-sdk", branch = "tanssi-polkadot-stable2407", default-features = false }
 
+
+#ip_pallet
+pallet_ip_pallet = { path = "IP_pallet", default-features = false, version = "0.2.0" }
+
 [profile.production]
 codegen-units = 1
 inherits = "release"
